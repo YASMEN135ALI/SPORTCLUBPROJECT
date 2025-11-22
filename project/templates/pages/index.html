@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<body class="">
+    {% load static %}
+
+    <div id="carouselExampleCaptions" class="carousel slide">
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                {% load static %}
+                <img src="{%static 'image/YA.jpg' %}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h2>your transformation begins here.Take the first step</h2>
+                    <p>Join the best.train with the elite.</p>
+
+                    <a class="btn btn-dark" href="{% url 'custom_login' %}">تسجيل الدخول</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                {% load static %}
+                <img src="{%static 'image/YA2.jpg' %}" class="d-block w-100" alt="...">
+                <div class=" carousel-caption d-none d-md-block">
+                    <h2>Stronger.Faster.Better.Every Day!</h2>
+                    <p>Push your limits .achieve greatnees.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                {% load static %}
+                <img src="{%static 'image/YAS.jpg' %}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h2>No excuses.Just progress</h2>
+                    <p>Book your session today.Tomorrow starts now!.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev  " type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <i class="fa-solid fa-angles-left  myicon"></i>
+            <span class="visually-hidden bg-black">Previous</span>
+        </button>
+        <button class="carousel-control-next " type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <i class="fa-solid fa-angles-right myicon"></i>
+            <span class="visually-hidden  bg-dark">Next</span>
+        </button>
+    </div>
+
+    {% endblock content %}

@@ -1,0 +1,76 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .receipt-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        background-color: #f9f9f9;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .receipt-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .receipt-header h2 {
+        color: #2e7d32;
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .receipt-details {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #333;
+    }
+
+    .receipt-details strong {
+        color: #555;
+    }
+
+    .receipt-footer {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .receipt-footer a {
+        text-decoration: none;
+        background-color: #2e7d32;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .receipt-footer a:hover {
+        background-color: #1b5e20;
+    }
+</style>
+
+<div class="receipt-container">
+    <div class="receipt-header">
+        <h2>✅ تم الدفع بنجاح</h2>
+        <p>شكراً لك على الدفع! إليك تفاصيل العملية:</p>
+    </div>
+
+    <div class="receipt-details">
+        <p><strong>اسم المستخدم:</strong> {{ payment.user.username }}</p>
+        <p><strong>المبلغ المدفوع:</strong> {{ payment.amount }} ريال</p>
+        <p><strong>طريقة الدفع:</strong> {{ payment.get_method_display }}</p>
+        <p><strong>رقم المعاملة:</strong> {{ payment.transaction_id }}</p>
+        <p><strong>تاريخ العملية:</strong> {{ payment.created_at|date:"Y-m-d H:i" }}</p>
+    </div>
+
+    <div class="receipt-footer">
+        <a href="/">العودة إلى الصفحة الرئيسية</a>
+    </div>
+</div>
+{% endblock %}

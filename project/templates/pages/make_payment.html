@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5 mt-auto">
+  <div class="row justify-content-center  mb-5">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow">
+        <div class="card-body p-4">
+          <h4 class="text-center mb-3">💳 الدفع</h4>
+          <p class="text-center fs-5">
+            💰 <strong>المبلغ المطلوب:</strong> <span class="text-primary">{{ amount }}</span> ريال
+          </p>
+          <p class="text-muted text-center mb-4">يرجى اختيار طريقة الدفع المناسبة لإتمام العملية</p>
+
+          <form method="POST" action="{% url 'make_payment' plan.id %}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label for="method" class="form-label">طريقة الدفع</label>
+              <select name="method" class="form-select" required>
+                <option value="">اختر طريقة الدفع</option>
+                <option value="cash">💵 نقدًا</option>
+                <option value="bank">🏦 حساب بنكي</option>
+                <option value="paypal">💻 PayPal</option>
+              </select>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success btn-lg w-100">✅ إتمام الدفع الآن</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

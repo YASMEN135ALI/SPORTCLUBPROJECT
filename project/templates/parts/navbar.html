@@ -1,0 +1,65 @@
+{% block content %}
+{% load static %}
+<nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-sm" data-bs-theme="dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'image/tt.jpg' %}" width="50" height="50" class="img">
+        </a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'index' %}">الرئيسية</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">من نحن</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sports_and_trainers' %}">الرياضات والمدربين</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">اتصل بنا</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'my_plan' %}">📋 خطتي</a>
+                </li>
+                <li class="nav-item">
+                    {% if plan and plan.id %}
+                        <a class="nav-link" href="{% url 'make_payment' plan.id %}">💳 الدفع</a>
+                    {% else %}
+                        <span class="nav-link disabled">💳 الدفع (لا توجد خطة)</span>
+                    {% endif %}
+                </li>
+
+                
+                <!-- إذا كان المستخدم مسجل الدخول -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="{% url 'profile' %}">صفحتي الشخصية</a>
+                        <a class="dropdown-item" href="{% url 'edit_profile' %}">تعديل البيانات</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">تسجيل الخروج</a>
+                    </div>
+                </li>
+                {% else %}
+                <!-- إذا لم يكن المستخدم مسجل الدخول -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">تسجيل الدخول</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="{% url 'custom_login' %}">تسجيل الدخول</a>
+                        <a class="dropdown-item" href="{% url 'register' %}">إنشاء حساب</a>
+                    </div>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock content %}

@@ -1,0 +1,43 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Club Of Champions</title>
+    <link rel="shortcut icon" href="{% static 'image/tt.jpg' %}" type="image/x-icon">
+    
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+       .contact {
+ 
+    background-image: url("{% static 'image/YAS.jpg' %}");
+
+       background-size: cover;
+       background-attachment: fixed;
+   }
+
+    </style>
+</head>
+
+<body>
+    {% include 'parts/navbar.html' %}
+       {% if message %}
+              <div class="alert alert-info" role="alert">
+            {{ message }}
+              </div>
+       {% endif %}
+    {% block content %}
+    {% endblock content %}
+    {% include 'parts/footer.html' %}
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.7.1.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

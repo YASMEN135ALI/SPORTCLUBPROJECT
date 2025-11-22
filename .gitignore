@@ -1,0 +1,17 @@
+# created by virtualenv automatically
+# تجاهل الملفات غير المهمة
+__pycache__/
+*.pyc
+*.sqlite3
+.env
+.venv/
+*.log
+db.sqlite3
+/static/
+media/
+
+# استثناء ملفات مهمة
+!README.md
+!manage.py
+!myproject/
+!myapp/

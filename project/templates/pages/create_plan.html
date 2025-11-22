@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-center mb-4 mt-5">✨ أنشئ خطة تدريبك</h2>
+
+  {% if error %}
+    <div class="alert alert-danger text-center">{{ error }}</div>
+  {% endif %}
+
+  <form method="POST" class="mx-auto" style="max-width: 600px;">
+    {% csrf_token %}
+
+    <label class="form-label">🎯 ما هو هدفك؟</label>
+    <select name="goal" class="form-select mb-3" required>
+      <option value="">اختر هدفك</option>
+      <option value="weight_loss">خسارة الوزن</option>
+      <option value="muscle_gain">بناء العضلات</option>
+      <option value="fitness">تحسين اللياقة</option>
+      <option value="relaxation">الاسترخاء والتوازن</option>
+      <option value="competition">تحضير لمسابقة</option>
+    </select>
+
+    <label class="form-label">🏋️ النشاط المفضل</label>
+    <input type="text" name="activity" class="form-control mb-3" placeholder="مثل: CrossFit أو Yoga" required>
+
+    <label class="form-label">👥 نمط التدريب</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="training_type" value="solo" required>
+      <label class="form-check-label">تدريب فردي</label>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="radio" name="training_type" value="group" required>
+      <label class="form-check-label">تدريب جماعي</label>
+    </div>
+
+    <label class="form-label">🕒 الوقت المفضل</label>
+    <select name="preferred_time" class="form-select mb-3" required>
+      <option value="">اختر الوقت</option>
+      <option value="morning">الصباح</option>
+      <option value="afternoon">الظهيرة</option>
+      <option value="evening">المساء</option>
+    </select>
+
+    <label class="form-label">📆 مدة التدريب</label>
+   <select name="duration" class="form-select mb-4" required>
+      <option value="">اختر المدة</option>
+      <option value="session">جلسة واحدة</option>
+      <option value="week">أسبوع</option>
+      <option value="month">شهر</option>
+      <option value="3_months">3 أشهر</option>
+      <option value="custom">مدة مخصصة</option>
+    </select>
+    <button type="submit" class="btn btn-success w-100">✨ أنشئ خطتي</button>
+
+  </form>
+</div>
+{% endblock %}

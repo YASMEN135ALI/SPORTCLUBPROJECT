@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="contactus" class="contact text-center mt-5">
+  <div class="w-50 mx-auto">
+    <h2 class="blue text-header d-inline-block p-2 mt-5 mb-4">Contact Us</h2>
+    <p class="text-white nnn pb-4">
+      Our website is your gateway to the world of sports! Enjoy a unique experience that combines professionalism and ease of use, where you can find everything you need—from training sessions to expert tips and sports insights—all in one place.
+    </p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    {% if user.is_authenticated %}
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="input-group mb-3">
+          {{ form.subject }}
+          {% if form.subject.errors %}
+            <div class="text-danger">{{ form.subject.errors.0 }}</div>
+          {% endif %}
+        </div>
+
+        <div class="input-group mb-3">
+          {{ form.message }}
+          {% if form.message.errors %}
+            <div class="text-danger">{{ form.message.errors.0 }}</div>
+          {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-dark">SHARE WITH US</button>
+      </form>
+    {% else %}
+      <div class="alert alert-warning mt-4">
+        You must be logged in to send a message.
+        <a href="{% url 'login' %}" class="btn btn-sm btn-light ms-2">Login</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

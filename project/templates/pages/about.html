@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5" style="min-height: calc(100vh - 160px); background-color: #f8f9fa;">
+
+  <!-- 🏢 تعريف النادي -->
+  <div class="mb-5 text-center">
+    <h2 class="mb-3  mt-5">من نحن</h2>
+    <p class="lead">نحن نادي رياضي متكامل، نؤمن بأن الصحة واللياقة هي طريق السعادة. نقدم برامج تدريبية متنوعة، مدربين
+      محترفين، وتجهيزات حديثة لكل الأعمار والمستويات.</p>
+  </div>
+
+
+  <!-- 🏆 قصص نجاح الأعضاء -->
+  <h3 class="section-title text-center mb-4">قصص نجاح نفتخر بها</h3>
+  <div class="row g-4 mb-5">
+    {% for story in stories %}
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        {% if story.image %}
+        <img src="{{ story.image.url }}" class="card-img-top" alt="{{ story.name }}">
+        {% endif %}
+        <div class="card-body">
+          <h5>{{ story.name }} – {{ story.age }} سنة</h5>
+          <p>"{{ story.quote }}"</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- 💪 لوحة الأبطال الأسبوعية -->
+  <h3 class="section-title text-center mb-4">أبطال الأسبوع</h3>
+  <div class="row g-4 mb-5 justify-content-center">
+    {% for champ in champions %}
+    <div class="col-md-6 col-lg-4">
+      <div class="bg-white p-4 shadow-sm text-center border rounded">
+        <h5>{{ champ.icon }} {{ champ.name }}</h5>
+        <p>{{ champ.achievement }}</p>
+        <small class="text-muted">الأسبوع: {{ champ.week }}</small>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- 🧠 نصائح المدربين -->
+  <h3 class="section-title text-center mb-4">نصائح المدربين</h3>
+  <div class="accordion mb-5" id="tipsAccordion">
+    {% for tip in tips %}
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="tip{{ forloop.counter }}">
+        <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button"
+          data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}">
+          {{ tip.title }}
+        </button>
+      </h2>
+      <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}">
+        <div class="accordion-body">
+          {{ tip.content }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+<h2 style="text-align:center; margin-bottom:20px; font-size:28px; color:#333; border-bottom: 2px solid #ccc; padding-bottom: 10px;">
+  ✨ نبض النادي ✨
+</h2>
+
+  <div style="display: flex; justify-content: center; margin-top: 30px;">
+    <table style="
+    width: 80%;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  ">
+      <thead style="background-color: #f0caca;">
+         <tr>
+        <th style="width: 20%; padding: 12px; border: 1px solid #b1e5ec;">📅 تاريخ النشر</th>
+        <th style="width: 20%; padding: 12px; border: 1px solid #b1e5ec;">📅 تاريخ الانتهاء</th>
+        <th style="width: 20%; padding: 12px; border: 1px solid #b1e5ec;">📌 النوع</th>
+        <th style="width: 40%; padding: 12px; border: 1px solid #b1e5ec;">🔍 المحتوى</th>
+      </tr>
+      </thead>
+      <tbody>
+        {% for item in club_pulse %}
+        <tr>
+          <td style="padding: 10px; border: 1px solid #e2e48e;">{{ item.publish_date }}</td>
+          <td style="padding: 10px; border: 1px solid #b1e091;">{{ item.expire_date }}</td>
+          <td style="padding: 10px; border: 1px solid #c8e3f5;">{{ item.get_category_display }}</td>
+          <td style="padding: 10px; border: 1px solid #a8c6ec;">{{ item.content }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4" style="padding: 10px; border: 1px solid #eee;"> مستاحتكم لمعرفه كل ماهو جديد حول النادي </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div> 
+
+ 
+
+
+
+
+
+<section class="container py-5" id="location">
+  <div class="row">
+    <!-- العنوان -->
+    <div class="col-12 text-center mb-4">
+      <h2 class="fw-bold">📍 موقع Champion Club</h2>
+      <p class="text-muted">رحلة تبدأ من الخيال وتنتهي في قلب البطولة</p>
+    </div>
+
+    <!-- الخريطة -->
+    <div class="col-md-6 mb-4 position-relative">
+        {% load static %}
+                <img src="{%static 'image/club.jpg' %}" alt="خريطة Champion Club" class="img-fluid rounded shadow">
+       
+
+      <!-- نقاط تفاعلية وهمية -->
+      <button class="btn btn-sm btn-dark position-absolute" style="top: 30%; left: 40%;">بوابة النادي</button>
+      <button class="btn btn-sm btn-success position-absolute" style="top: 60%; left: 20%;">كافيه الأبطال</button>
+      <button class="btn btn-sm btn-primary position-absolute" style="top: 75%; left: 60%;">ساحة التحدي</button>
+    </div>
+
+    <!-- النصوص -->
+    <div class="col-md-6">
+      <h5 class="fw-bold">الوصف الطاقي للموقع:</h5>
+      <p>يقع النادي بين تلال جبلة وبحيرة اللاذقية، على طريق الأبطال، حيث تلتقي الطبيعة بالحماس.</p>
+
+      <h5 class="fw-bold mt-4">احداثيات النادي:</h5>
+      <p><code>35.5231°N, 35.9784°E</code> <button class="btn btn-sm btn-outline-secondary">نسخ</button></p>
+
+      <h5 class="fw-bold mt-4">طرق الوصول:</h5>
+      <ul class="list-group">
+        <li class="list-group-item">🚗 من مركز المدينة: عبر شارع الأبطال – 7 دقائق</li>
+        <li class="list-group-item">🚶‍♀️ من جبلة القديمة: عبر ممر الشجاعة – 12 دقيقة</li>
+        <li class="list-group-item">🧭 من محطة الطاقة: عبر طريق النخبة – 5 دقائق</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div>
+{% endblock %}

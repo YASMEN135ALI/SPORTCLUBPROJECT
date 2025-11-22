@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
+  <div class="card shadow-lg w-100" style="max-width: 500px;">
+    <div class="card-body p-5">
+      <h2 class="text-center text-dark mb-4">🔐 تسجيل الدخول</h2>
+      <p class="text-center text-muted mb-4">أدخل بياناتك لتسجيل الدخول إلى حسابك</p>
+
+      {% if error %}
+        <div class="alert alert-danger text-center">{{ error }}</div>
+      {% endif %}
+
+      <form method="POST" action="{% url 'custom_login' %}" class="needs-validation" novalidate>
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="username" class="form-label">اسم المستخدم</label>
+          <input type="text" name="username" class="form-control" placeholder="أدخل اسم المستخدم" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">كلمة المرور</label>
+          <input type="password" name="password" class="form-control" placeholder="********" required>
+        </div>
+
+        <div class="d-grid mt-4">
+          <button type="submit" class="btn btn-primary btn-lg">تسجيل الدخول</button>
+        </div>
+
+        <div class="text-center mt-3">
+          <small>ليس لديك حساب؟ <a href="{% url 'register' %}">أنشئ حساب جديد</a></small>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

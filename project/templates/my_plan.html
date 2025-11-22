@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .plan-card {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  .plan-card h3 {
+    font-weight: bold;
+    margin-bottom: 25px;
+  }
+
+  .plan-detail {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .plan-detail i {
+    margin-right: 8px;
+  }
+
+  .no-plan {
+    background-color: #f8f9fa;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+</style>
+
+<div class="container py-5 mt-5">
+  <h2 class="text-center mb-5">📋 خطتي التدريبية</h2>
+
+  {% if plan %}
+    <div class="plan-card mx-auto" style="max-width: 700px;">
+      <h3 class="text-center">💪 خطة التدريب الخاصة بك</h3>
+      <div class="plan-detail"><i>🎯</i><strong>الهدف:</strong> {{ plan.get_goal_display }}</div>
+      <div class="plan-detail"><i>🏋️</i><strong>النشاط:</strong> {{ plan.activity }}</div>
+      <div class="plan-detail"><i>👥</i><strong>نوع التدريب:</strong> {{ plan.training_type }}</div>
+      <div class="plan-detail"><i>🕒</i><strong>الوقت المفضل:</strong> {{ plan.get_preferred_time_display }}</div>
+      <div class="plan-detail"><i>📆</i><strong>المدة:</strong> {{ plan.get_duration_display }}</div>
+      <div class="plan-detail"><i>💳</i><strong>حالة الدفع:</strong> {{ plan.is_paid|yesno:"مدفوعة,غير مدفوعة" }}</div>
+      <div class="plan-detail"><i>✅</i><strong>حالة الخطة:</strong> {{ plan.is_active|yesno:"مفعّلة,غير مفعّلة" }}</div>
+
+      <div class="text-center mt-4">
+        {% if not plan.is_paid %}
+          <a href="{% url 'make_payment' plan.id %}" class="btn btn-light btn-lg">💳 إتمام الدفع</a>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+   <div style="
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+">
+  <div class="no-plan" style="
+    max-width: 500px;
+    width: 100%;
+    background-color: #fdfdfd;
+    padding: 40px 30px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #333;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid #eee;
+  ">
+    <p style="margin-bottom: 25px;">🚫 لا توجد خطة تدريبية حتى الآن.</p>
+    <a href="{% url 'create_plan' %}" class="btn btn-primary btn-lg">➕ إنشاء خطة جديدة</a>
+  </div>
+</div>
+
+  {% endif %}
+</div>
+{% endblock %}

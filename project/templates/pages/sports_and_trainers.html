@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+  <h2 class="text-center mb-5">🏋️‍♂️ الرياضات والمدربون</h2>
+
+  {% for sport in sports %}
+    <div class="card mb-5 shadow-lg border-0">
+      <div class="card-header bg-primary text-white text-center py-3 rounded-top">
+        <h3 class="mb-0">{{ sport.name }}</h3>
+      </div>
+
+      <div class="row g-0">
+        <div class="col-md-4">
+          {% if sport.image %}
+            <img src="{{ sport.image.url }}" class="img-fluid h-100 w-100 rounded-start" style="object-fit: cover;" alt="{{ sport.name }}">
+          {% else %}
+            <img src="{% static 'images/yoga.jpg' %}" class="img-fluid h-100 w-100 rounded-start" alt="صورة افتراضية">
+          {% endif %}
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="text-muted">{{ sport.description }}</p>
+
+            <hr class="my-4">
+
+            <h5 class="text-center mb-4">👨‍🏫 المدربون المرتبطون بهذه الرياضة</h5>
+            <div class="row g-4">
+              {% for trainer in sport.trainer_set.all %}
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 border-0 shadow-sm">
+                    {% if trainer.image %}
+                      <img src="{{ trainer.image.url }}" class="card-img-top" alt="{{ trainer.name }}">
+                    {% else %}
+                      <img src="{% static 'images/default_trainer.jpg' %}" class="card-img-top" alt="صورة افتراضية">
+                    {% endif %}
+                    <div class="card-body">
+                      <h5 class="card-title">{{ trainer.name }}</h5>
+                      <p class="text-success">{{ trainer.experience }}</p>
+                      <p class="card-text">{{ trainer.bio }}</p>
+                      <p>⭐️ التقييم: 
+                        {% if trainer.average_rating %}
+                          {{ trainer.average_rating }}
+                        {% else %}
+                          لا يوجد تقييم
+                        {% endif %}
+                      </p>
+
+                      <form method="POST" action="{% url 'rate_trainer' trainer.id %}">
+                        {% csrf_token %}
+                        <div class="mb-2">
+                          <select name="value" class="form-select">
+                            <option value="5">5 نجوم</option>
+                            <option value="4">4 نجوم</option>
+                            <option value="3">3 نجوم</option>
+                            <option value="2">2 نجوم</option>
+                            <option value="1">1 نجمة</option>
+                          </select>
+                        </div>
+                        <textarea name="comment" class="form-control mb-2" placeholder="تعليق (اختياري)"></textarea>
+                        <button type="submit" class="btn btn-outline-primary w-100">أضف تقييم</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              {% empty %}
+                <p class="text-muted text-center">لا يوجد مدربين مرتبطين بهذه الرياضة.</p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+<h2 style="text-align:center; margin-bottom:20px; font-size:28px; color:#333; border-bottom: 2px solid #ccc; padding-bottom: 10px;">
+  💰 أسعار الكورسات حسب الرياضة
+</h2>
+
+<div style="overflow-x:auto; display: flex; justify-content: center;">
+  <table style="
+    width: 95%;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+  ">
+    <thead style="background-color: #d8d645;">
+      <tr style="color: #444;">
+        <th style="padding: 14px; border-bottom: 2px solid #ddd;">🏋️‍♂️ الرياضة</th>
+        <th style="padding: 14px; border-bottom: 2px solid #ddd;">💵 السعر الأساسي</th>
+        <th style="padding: 14px; border-bottom: 2px solid #ddd;">👥 تدريب جماعي</th>
+        <th style="padding: 14px; border-bottom: 2px solid #ddd;">🧍‍♂️ تدريب فردي مخصص</th>
+        <th style="padding: 14px; border-bottom: 2px solid #ddd;">🕐 جلسة واحدة</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for course in course_pricing %}
+      <tr style="transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#f9f9f9'" onmouseout="this.style.backgroundColor='transparent'">
+        <td style="padding: 12px; border-bottom: 1px solid #eee;">{{ course.sport.name }}</td>
+        <td style="padding: 12px; border-bottom: 1px solid #eee;">${{ course.base_price }}</td>
+        <td style="padding: 12px; border-bottom: 1px solid #eee;">${{ course.group_training_price }}</td>
+        <td style="padding: 12px; border-bottom: 1px solid #eee;">${{ course.private_training_price }}</td>
+        <td style="padding: 12px; border-bottom: 1px solid #eee;">${{ course.single_session_price }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5" style="padding: 14px; color: #888;">لا توجد بيانات حالياً، سيتم تحديث الأسعار قريباً.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% if user.is_authenticated %}
+<section class="py-5 bg-light text-center">
+<div class="container">
+    <h2 class="mb-4 text-primary">✨ هل أنت جاهز لبدء رحلتك التدريبية؟</h2>
+    <p class="lead mb-4">أنشئ خطة تدريبك الشخصية واختر النشاط، الهدف، والوقت الذي يناسبك.</p>
+    <a href="{% url 'create_plan' %}" class="btn btn-success btn-lg px-5">
+      🚀 أنشئ خطتك الآن
+    </a>
+  </div>
+</section>
+{% endif %}
+
+
+{% endblock %}

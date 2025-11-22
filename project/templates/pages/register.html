@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
+  <div class="card shadow-lg w-100" style="max-width: 700px;">
+    <div class="card-body p-5">
+      <h2 class="text-center text-dark mb-4 mt-3">📝 إنشاء حساب جديد</h2>
+      <p class="text-center text-muted mb-4">املأ البيانات لإنشاء حسابك والبدء في رحلتك الرياضية</p>
+
+      {% if error %}
+        <div class="alert alert-danger text-center">
+          {% for msg in error %}
+            <div>{{ msg }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <form method="POST" action="{% url 'register' %}" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="username" class="form-label">اسم المستخدم</label>
+          <input type="text" name="username" class="form-control" placeholder="أدخل اسم المستخدم" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="email_address" class="form-label">البريد الإلكتروني</label>
+          <input type="email" name="email_address" class="form-control" placeholder="example@email.com" required>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="age" class="form-label">العمر</label>
+            <input type="number" name="age" class="form-control" placeholder="أدخل عمرك" required>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="password" class="form-label">كلمة المرور</label>
+            <input type="password" name="password" class="form-control" placeholder="كلمة مرور قوية" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="mobile_phone" class="form-label">رقم الهاتف</label>
+            <input type="tel" name="mobile_phone" class="form-control" placeholder="05XXXXXXXX" required>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="subscription" class="form-label">نوع الاشتراك</label>
+            <select name="subscription" class="form-select" required>
+              <option value="">-- اختر نوع الاشتراك --</option>
+              <option value="daily">يومي</option>
+              <option value="monthly">شهري</option>
+              <option value="yearly">سنوي</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-label">الصورة الشخصية (اختياري)</label>
+          <input type="file" name="image" class="form-control">
+        </div>
+
+        <div class="d-grid mt-4">
+          <button type="submit" class="btn btn-success btn-lg">إنشاء الحساب</button>
+        </div>
+
+        <div class="text-center mt-3">
+          <small>هل لديك حساب؟ <a href="{% url 'custom_login' %}">تسجيل الدخول</a></small>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

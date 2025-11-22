@@ -1,0 +1,212 @@
+ /*صوره الشعار*/
+ .img{
+    height: 50px;
+    width: 50px;
+    border-radius: 20px;
+}
+.secondary:hover{
+  background-color: green;
+}
+/*خلفيه الشريط*/
+.navbar{
+    background-color: #0e0d0d ! important;  
+}
+/*ايقونه الاختيارات*/
+.rrrt{
+    font-size: 40px !important;
+}
+/*حجم صور السلايد*/
+.carsouel-item{
+    height: 100vh;
+}
+/*مسافه داخل كتابه السلايد*/
+.carousel-caption{
+    padding: 50px !important;
+}
+
+/*نوع الخط*/
+*{ 
+    font-style: normal;
+}
+
+/*حجم صور السلايد*/
+.carsouel-item img{
+    height: 100vh;
+}
+
+/*زر التنقل*/
+.visually-hidden{
+    color: blue;
+    size: 30px;
+}
+/*خلفيه الكتابه في السلايد*/
+.carousel-caption{
+    background-color:rgb(230, 47, 47);
+   
+    border-radius: 40px;
+    bottom: 8rem;
+}
+/*تغير خلفيه الكتابه في السلايد عند وضع المؤشر عليها*/
+.carousel-caption:hover{
+    background-color: rgb(175, 60, 60);
+    transition: ease .7s;
+}
+/*زر تسجيل الدخول*/
+.btn-dark:hover{
+    background-color: crimson!important;
+    border-radius: 20px;
+    transition: ease all 1s;
+}
+/*الازرار ضمن الكراسول*/
+.carousel-indicators button{
+    height: 20px !important;
+    width: 20px !important;
+border-radius: 50% !important;
+background-color: #000 !important;
+}
+.myicon{
+    color: blue;
+    font-size: 30px;
+}
+
+/*sports*/
+.text-header {
+    border-bottom: crimson solid 3px;
+
+} 
+/*الازرار يلي تحت سبورت*/
+.b:hover{
+    background-color:coral ;
+    transition: ease all 1s;
+    border-radius: 20px;
+} 
+/*star*/
+.ss:hover{
+    color: yellow;
+}
+.bluecimon:hover{
+    color: yellow !important;
+}
+.bluecimon{
+    cursor: pointer;
+}
+/*داخل ال اوفكانفاز*/
+/* زر الاكمال*/
+
+.cc:hover{
+    background-color:crimson !important ;
+    transition: ease all 1s !important;
+    border-radius: 20px !important;   
+}
+
+
+.ofcan-img {
+    height: 250px !important;
+    width: 250px !important ;
+    
+}
+.of-head{
+    color: crimson;
+}
+.ofcan-img:hover{
+    transform: skew(-5deg);
+    transition: ease all 1s ;
+}
+/*.....................................*/
+
+
+
+
+/*التعديلات على الكارد*/
+.card{
+    overflow: hidden;
+}
+.card img:hover{
+    transform: scale(1.1);
+
+}
+.card img{
+   height: 300px; 
+   width: 100%;}
+/*..........................................*/
+/*contact...................................*/
+.contact{
+height: 80vh;
+background-image: url('../imag/YAS.jpg');
+background-size: cover;
+background-attachment: fixed;
+}
+/*لون الباراغراف*/
+.blue{
+    color: blue;
+}
+.inputcontact{
+    border-radius: 0px;
+}
+.contact button{
+    width: 150px !important;
+}
+/*الكتابه
+.nnn{
+    color: #0f0f0f !important;
+}
+/*............العروض */
+.bbest img:hover{
+transform: rotate(5deg) scale(1.1);
+transition: all ease 1s;
+}
+/*سياسات الخدمه*/
+ .accordion-button::after{
+    display: none !important;
+}
+
+.accordion .accordion-button{
+    background-color:#000 !important;
+    color:white !important;
+    display:inline-flex !important;
+    justify-content: center !important;
+}
+
+.Hacord{
+    background-color:rgb(209, 15, 15);
+}
+/*.................................*/
+
+.mb {
+    height: 200px;
+    width: 200px;
+}
+
+
+/*services.............................*/
+#services{
+    margin-top: 100px !important;
+}
+/*.....footer...............*/
+footer{
+    background-color: blue;
+}
+/*...................................................*/
+/*scrolle bar*/
+::-webkit-scrollbar{
+    width: 20px ;
+}
+/*tarket*/
+::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 5px grey ;
+    border-radius: 10px;
+}
+/*handel*/
+::-webkit-scrollbar-thumb{
+background: rgb(12, 12, 12);
+border-radius: 10px;
+}
+/*handel on over*/
+::-webkit-scrollbar-thumb:hover{
+    background:crimson;
+}
+
+
+
+
+
